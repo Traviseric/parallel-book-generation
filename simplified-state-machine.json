@@ -1,0 +1,32 @@
+{
+  "Comment": "Parallel Chapter Generation Pattern",
+  "StartAt": "GenerateGlobalContext",
+  "States": {
+    "GenerateGlobalContext": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:region:account:function:context-generator",
+      "Next": "GenerateAllChapters"
+    },
+    "GenerateAllChapters": {
+      "Type": "Map",
+      "MaxConcurrency": 22,
+      "ItemsPath": "$.chapterReferences",
+      "Iterator": {
+        "StartAt": "GenerateChapter",
+        "States": {
+          "GenerateChapter": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:region:account:function:content-generator",
+            "End": true
+          }
+        }
+      },
+      "Next": "AssembleBook"
+    },
+    "AssembleBook": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:region:account:function:book-assembler",
+      "End": true
+    }
+  }
+}
