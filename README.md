@@ -84,12 +84,14 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for technical details.
 ## Limitations
 
 - Requires upfront context generation
-- Best suited for 5-20 chapter books
-- Memory constraints on very large books (100+ chapters)
+- Best suited for 5-20 non-fiction chapter books
 
 ## Contributing
 
 This architecture pattern can be adapted for any parallel content generation need. PRs welcome!
+
+## Related Projects
+- [knobs-framework](https://github.com/Traviseric/knobs-framework) - Control system for maintaining quality and variation in parallel generation
 
 ## Citation
 
